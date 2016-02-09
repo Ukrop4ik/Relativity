@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 73c842824a9233845a5dbec14a952706
-timeCreated: 1454755122
+guid: 1f8c3c74eecb4b149bd9f805b09d1658
+timeCreated: 1455046022
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Torus
+    4300000: Cylinder
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -55,7 +55,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
@@ -70,7 +70,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

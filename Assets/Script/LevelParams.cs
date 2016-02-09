@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LevelParams : MonoBehaviour {
+    [SerializeField]
+    UILevel ui;
 
     public string lvl_name;
     public int bonus_count { get; private set; }
@@ -19,6 +21,7 @@ public class LevelParams : MonoBehaviour {
     public void SetBonus(int value)
     {
         bonus_count += value;
+        ui.bonus_text.text = "Bonus: " + bonus_count;
     }
     public void ArtefactRemove(GameObject artefact)
     {
