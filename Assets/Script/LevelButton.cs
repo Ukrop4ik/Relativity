@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour {
-    public int id;
+    public string id;
     public Image starsimage;
     public Text number;
 
     void Start()
     {
-        number.text = id.ToString();
+        number.text = id;
     }
     public void Click()
     {
-        SceneManager.LoadScene(id.ToString());
+        SceneManager.LoadScene(id);
     }
 }

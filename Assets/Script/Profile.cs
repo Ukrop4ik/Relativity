@@ -4,11 +4,13 @@ using UnityEngine;
 using LitJson;
 using System.IO;
 using System.Diagnostics;
+using UnityEngine.SceneManagement;
 
 public class Profile : MonoBehaviour {
 
     public List<LevelData> levels = new List<LevelData>();
     public int levelcount;
+    public string[] sceneid;
 
     void Start()
     {
@@ -35,9 +37,19 @@ public class Profile : MonoBehaviour {
         File.WriteAllText(Application.persistentDataPath + "/" + "RelatyvityProfile" + ".json", jsonData.ToString());
     }
 
+    public void SaveProfile(List<LevelData> levels)
+    {
+        ProfileData data = new ProfileData(levels.Count, levels);
+
+        JsonData jsonData = JsonMapper.ToJson(data);
+
+        File.WriteAllText(Application.persistentDataPath + "/" + "RelatyvityProfile" + ".json", jsonData.ToString());
+    }
+
     [ContextMenu("LoadProfile")]
     public void LoadProfile()
     {
+        levels.Clear();
 
         if (!File.Exists(Application.persistentDataPath + "/" + "RelatyvityProfile" + ".json"))
         {
