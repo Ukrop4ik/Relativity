@@ -19,6 +19,11 @@ public class StartMenu : MonoBehaviour {
     {
         MainMenueUI.SetActive(!MainMenueUI.activeInHierarchy);
         LevelPanel.SetActive(!LevelPanel.activeInHierarchy);
+
+        if(!profile) return;
+        if(profile.levels.Count < 1) return;
+
+
     }
 
     void OpenProfile()

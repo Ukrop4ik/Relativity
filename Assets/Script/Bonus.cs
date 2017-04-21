@@ -16,8 +16,8 @@ public class Bonus : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
+            bonus_to_params.GetBonus();
             Debug.Log("Collect!");
-            bonus_to_params.SetBonus(bonus_value);
             Destroy(gameObject);
             
         }

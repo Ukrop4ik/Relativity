@@ -20,7 +20,12 @@ public class PointJump : MonoBehaviour {
 
         if (gameObject.transform.parent)
         {
+            joinline.enabled = true;
             joinline.SetPosition(1, gameObject.transform.parent.transform.position);
+        }
+        else
+        {
+            joinline.enabled = false;
         }
 
         if (Input.GetMouseButton(0))
@@ -38,6 +43,11 @@ public class PointJump : MonoBehaviour {
                         gameObject.transform.SetParent(null);
                         gameObject.transform.SetParent(hit.collider.gameObject.transform);
                     }
+                }
+                if (hit.collider.gameObject.tag == "Player")
+                {
+                    gameObject.transform.SetParent(null);
+                    
                 }
             }
         }

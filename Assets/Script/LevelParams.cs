@@ -6,31 +6,11 @@ public class LevelParams : MonoBehaviour {
     [SerializeField]
     UILevel ui;
 
-    public string lvl_name;
-    public int bonus_count { get; private set; }
-    public int artefact_count_in_lvl;
-    public bool artefact_status = false;
+    public int bonuscount;
 
-    public List<GameObject> artefacts = new List<GameObject>();
-
-    void Start()
+    public void GetBonus()
     {
-        artefacts.AddRange(GameObject.FindGameObjectsWithTag("artefact"));
-        artefact_count_in_lvl = artefacts.Count;
-    }
-    public void SetBonus(int value)
-    {
-        bonus_count += value;
-        ui.bonus_text.text = "Bonus: " + bonus_count;
-    }
-    public void ArtefactRemove(GameObject artefact)
-    {
-        artefacts.Remove(artefact);
-        artefact_count_in_lvl = artefacts.Count;
-
-        if (artefact_count_in_lvl == 0)
-        {
-            artefact_status = true;
-        }
+        bonuscount++;
+        ui.starpanel.sprite = ui.stars[bonuscount - 1];
     }
 }
