@@ -17,6 +17,7 @@ public class LineMotionPro : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (!StartTarget || !EndTarget) return;
 
         if (TimeOfOneTrace < 0.001)
         {
