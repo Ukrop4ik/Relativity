@@ -1,20 +1,35 @@
-/.consulo
-/.vscode
-*.unityproj
-*.csproj
-*.pidb
-*.sln
-*.suo
-*.userprefs
-*.unityproj.meta
-*.csproj.meta
+# =============== #
+# Unity generated #
+# =============== #
+[Tt]emp/
+[Oo]bj/
+[Bb]uild
+/[Bb]uilds/
+/[Ll]ibrary/
+sysinfo.txt
+*.stackdump
+/Assets/AssetStoreTools*
+*.apk
+*.unitypackage
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+[Ee]xported[Oo]bj/
+.vs/
+/*.userprefs
+/*.csproj
+/*.pidb
 *.pidb.meta
-*.sln.meta
-*.suo.meta
-*.userprefs.meta
-*ReSharper*
-/Temp*/
-*UpgradeReport*
+/*.suo
+/*.sln*
+/*.user
+/*.unityproj
+/*.booproj
+.consulo/
+/*.tmp
+/*.svd
+
 obj
 Relativity.csproj
 Relativity.pidb
@@ -28,5 +43,4 @@ UpgradeLog*
 /Assembly-CSharp.csproj.user
 /Assembly-CSharp.suo
 editor.log
-/AB/
-/Library
+
