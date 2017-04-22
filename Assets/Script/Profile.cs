@@ -34,6 +34,7 @@ public class Profile : MonoBehaviour {
 
         JsonData jsonData = JsonMapper.ToJson(data);
 
+
         File.WriteAllText(Application.persistentDataPath + "/" + "RelatyvityProfile" + ".json", jsonData.ToString());
     }
 
