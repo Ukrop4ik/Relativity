@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class EndGame : MonoBehaviour {
@@ -16,8 +17,8 @@ public class EndGame : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player" && bonus_to_params.bonuscount > 0)
         {
-            Time.timeScale = 0;
-            text.SetActive(true);
+            bonus_to_params.LevelWin();
+
         }
     }
 }

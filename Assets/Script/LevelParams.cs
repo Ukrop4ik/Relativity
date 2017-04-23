@@ -3,25 +3,53 @@ using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class LevelParams : MonoBehaviour {
     [SerializeField]
     UILevel ui;
     [SerializeField]
-    int levelnumber;
-
+    public int levelnumber;
+    public float leveltime = 100;
+    GameObject endtrigger;
     private List<int> nums = new List<int>();
     public int bonuscount;
+    bool stop = false;
+
+    void Start()
+    {
+        endtrigger = GameObject.Find("EndTrigger");
+        endtrigger.SetActive(false);
+    }
 
     public void GetBonus()
     {
         bonuscount++;
         ui.starpanel.sprite = ui.stars[bonuscount - 1];
+        if (bonuscount > 0)
+        {
+            endtrigger.SetActive(true);
+        }
+    }
+
+    void Update()
+    {
+
+        if (!stop) leveltime -= Time.deltaTime;
+
+        if (leveltime <= 0)
+        {
+            leveltime = 0;
+            LevelFail();
+        }
+
+        ui.timetext.text = leveltime.ToString("0");
     }
 
     [ContextMenu("LevelWin")]
     public void LevelWin()
     {
+        Destroy(GameObject.Find("Player"));
         Profile profile = GameObject.Find("Profile").gameObject.GetComponent<Profile>();
         JsonData data = DataLoad();
         List<LevelData> levels = new List<LevelData>();
@@ -49,6 +77,17 @@ public class LevelParams : MonoBehaviour {
         }
 
         profile.SaveProfile(levels);
+        ui.WinPanel.SetActive(true);
+        stop = true;
+
+    }
+
+    [ContextMenu("LevelFail")]
+    public void LevelFail()
+    {
+        stop = true;
+        Destroy(GameObject.Find("Player"));
+        ui.LoosePanel.SetActive(true);
     }
 
     private static JsonData DataLoad()
