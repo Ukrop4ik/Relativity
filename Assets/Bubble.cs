@@ -16,7 +16,7 @@ public class Bubble : MonoBehaviour {
     void Start()
     {
         Time.timeScale = 0;
-        transform.position = Camera.main.WorldToScreenPoint(pivot.position);
+        if(pivot) transform.position = Camera.main.WorldToScreenPoint(pivot.position);
     }
 
     public void Close()

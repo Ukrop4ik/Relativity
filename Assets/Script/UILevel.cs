@@ -21,10 +21,12 @@ public class UILevel : MonoBehaviour {
     LevelParams bonus_to_params;
 
     public Text timetext;
+    public Text leveltext;
 
     void Start()
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
+        leveltext.text = "LEVEL: " + bonus_to_params.levelnumber.ToString();
     }
 
     public void PauseButton()

@@ -7,6 +7,10 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField]
     int Health;
 
+    void Start()
+    {
+        transform.SetParent(null);
+    }
 
     void Update()
     {

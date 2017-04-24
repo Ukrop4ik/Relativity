@@ -12,9 +12,15 @@ public class PointJump : MonoBehaviour {
 
         joinline = gameObject.GetComponent<LineRenderer>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, Max_join_dist);
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         joinline.SetPosition(0, gameObject.transform.position);
 
