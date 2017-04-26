@@ -38,7 +38,7 @@ public class UILevel : MonoBehaviour {
         }
         else
         {
-            Time.timeScale = 0;
+            Time.timeScale = 0.001f;
             pause = true;
         }
     }

@@ -17,12 +17,29 @@ public class StartMenu : MonoBehaviour {
         profile = GameObject.Find("Profile").gameObject.GetComponent<Profile>();
     }
 
+    public void CloseLevelPanel()
+    {
+    }
+
     public void OpenLevelPanel()
     {
         MainMenueUI.SetActive(!MainMenueUI.activeInHierarchy);
         LevelPanel.SetActive(!LevelPanel.activeInHierarchy);
 
-        if(!profile) return;
+
+        if (LevelPanel.activeInHierarchy)
+        {
+            if (levelpanelcontent.childCount > 0)
+            {
+                for (int i = 0; i < levelpanelcontent.childCount; i++)
+                {
+                    Destroy(levelpanelcontent.GetChild(i).gameObject);
+                }
+            }
+
+        }
+
+        if (!profile) return;
        // if(profile.levels.Count < 1) return;
 
         foreach (var button in buttons)
