@@ -15,6 +15,8 @@ public class LevelParams : MonoBehaviour {
     private List<int> nums = new List<int>();
     public int bonuscount;
     bool stop = false;
+    [Tooltip("1 to 5 level hard")]
+    public int hard = 1;
 
     void Start()
     {
@@ -58,21 +60,21 @@ public class LevelParams : MonoBehaviour {
         {
             if ((int)data["Levels"][i]["levelnumber"] == levelnumber)
             {
-                LevelData lev = new LevelData(levelnumber, bonuscount, 0, 0);
+                LevelData lev = new LevelData(levelnumber, bonuscount, 0, 0, hard);
                 levels.Add(lev);
                 nums.Add(i);
                 continue;
             }
 
             nums.Add(i);
-            LevelData l = new LevelData((int)data["Levels"][i]["levelnumber"], (int)data["Levels"][i]["levelstars"], (int)data["Levels"][i]["levelscore"], (double)data["Levels"][i]["leveltime"]);
+            LevelData l = new LevelData((int)data["Levels"][i]["levelnumber"], (int)data["Levels"][i]["levelstars"], (int)data["Levels"][i]["levelscore"], (double)data["Levels"][i]["leveltime"], (int)data["Levels"][i]["levelhard"]);
             levels.Add(l);
 
         }
 
         if (!nums.Contains(levelnumber))
         {
-            LevelData newlevel = new LevelData(levelnumber, bonuscount, 0, 0);
+            LevelData newlevel = new LevelData(levelnumber, bonuscount, 0, 0, hard);
             levels.Add(newlevel);
         }
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour {
 
@@ -11,6 +12,8 @@ public class StartMenu : MonoBehaviour {
     private List<GameObject> buttons = new List<GameObject>();
     Profile profile;
     public Sprite[] stars;
+    public List<Color> colors = new List<Color>();
+    public Sprite uncnoun;
 
     void Start()
     {
@@ -52,6 +55,7 @@ public class StartMenu : MonoBehaviour {
         foreach (var scene in profile.levels)
         {
             if (scene.levelnumber == 0) continue;
+
             GameObject levelbutton = Instantiate(buttonpref);
             levelbutton.transform.SetParent(levelpanelcontent);
             levelbutton.GetComponent<LevelButton>().id = scene.levelnumber.ToString();
@@ -73,14 +77,37 @@ public class StartMenu : MonoBehaviour {
                 default:
                     break;
             }
+            switch (scene.levelhard)
+            {
+                case 1:
+                    levelbutton.GetComponent<LevelButton>().image.color = colors[1];
+                    break;
+                case 2:
+                    levelbutton.GetComponent<LevelButton>().image.color = colors[2];
+                    break;
+                case 3:
+                    levelbutton.GetComponent<LevelButton>().image.color = colors[3];
+                    break;
+                case 4:
+                    levelbutton.GetComponent<LevelButton>().image.color = colors[4];
+                    break;
+                case 5:
+                    levelbutton.GetComponent<LevelButton>().image.color = colors[5];
+                    break;
+                default:
+                    break;
+            }
             buttons.Add(levelbutton);
         }
 
-       // if (profile.levels.Count > 1) return;
+        // if (profile.levels.Count > 1) return;
+        int scen1 = SceneManager.sceneCountInBuildSettings;
+        if (scen1 - 2 <= profile.levels.Count) return;
         GameObject buttonnew = Instantiate(buttonpref);
         buttonnew.transform.SetParent(levelpanelcontent);
         buttonnew.GetComponent<LevelButton>().id = profile.levels.Count.ToString();
         buttonnew.GetComponent<LevelButton>().starsimage.sprite = stars[0];
+        buttonnew.GetComponent<LevelButton>().centerimage.sprite = uncnoun;
     }
 
     void OpenProfile()

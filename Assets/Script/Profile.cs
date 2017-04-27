@@ -25,7 +25,7 @@ public class Profile : MonoBehaviour {
 
         for (int i = 0; i < 1; ++i)
         {
-            LevelData Level = new LevelData(i, 0, 0, 0);
+            LevelData Level = new LevelData(i, 0, 0, 0, 1);
             levels.Add(Level);
         }
 
@@ -60,7 +60,7 @@ public class Profile : MonoBehaviour {
         JsonData data = DataLoad();
         for (int i = 0; i < data["Levels"].Count; i++)
         {
-            LevelData l = new LevelData((int)data["Levels"][i]["levelnumber"], (int)data["Levels"][i]["levelstars"], (int)data["Levels"][i]["levelscore"], (double)data["Levels"][i]["leveltime"]);
+            LevelData l = new LevelData((int)data["Levels"][i]["levelnumber"], (int)data["Levels"][i]["levelstars"], (int)data["Levels"][i]["levelscore"], (double)data["Levels"][i]["leveltime"], (int)data["Levels"][i]["levelhard"]);
             levels.Add(l);
         }
 
@@ -99,10 +99,11 @@ public class LevelData
     public int levelstars;
     public int levelscore;
     public double leveltime;
+    public int levelhard;
 
-    public LevelData(int number, int stars, int score, double time)
+    public LevelData(int number, int stars, int score, double time, int hard)
     {
-
+        levelhard = hard;
         levelnumber = number;
         levelstars = stars;
         levelscore = score;
