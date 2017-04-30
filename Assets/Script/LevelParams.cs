@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class LevelParams : MonoBehaviour {
     [SerializeField]
     UILevel ui;
+    public List<GameObject> bonuslist = new List<GameObject>();
     [SerializeField]
     public int levelnumber;
     public float leveltime = 100;
@@ -17,20 +18,33 @@ public class LevelParams : MonoBehaviour {
     bool stop = false;
     [Tooltip("1 to 5 level hard")]
     public int hard = 1;
+    public bool win = false;
 
     void Start()
     {
         endtrigger = GameObject.Find("EndTrigger");
         endtrigger.SetActive(false);
+        bonuslist.AddRange(GameObject.FindGameObjectsWithTag("Bonus"));
     }
 
     public void GetBonus()
     {
-        bonuscount++;
-        ui.starpanel.sprite = ui.stars[bonuscount - 1];
-        if (bonuscount > 0)
+        if (bonuscount < 3)
         {
-            endtrigger.SetActive(true);
+            bonuscount++;
+            ui.starpanel.sprite = ui.stars[bonuscount - 1];
+            if (bonuscount > 0)
+            {
+                endtrigger.SetActive(true);
+            }
+        }        
+        if (bonuscount >= 3)
+        {
+            foreach (GameObject bonus in bonuslist)
+            {
+                Bonus b = bonus.GetComponent<Bonus>();
+                b.SetEvil();
+            }
         }
     }
 
@@ -88,8 +102,8 @@ public class LevelParams : MonoBehaviour {
     public void LevelFail()
     {
         stop = true;
-        Destroy(GameObject.Find("Player"));
         ui.LoosePanel.SetActive(true);
+        Destroy(GameObject.Find("Player"));
     }
 
     private static JsonData DataLoad()

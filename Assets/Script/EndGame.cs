@@ -17,8 +17,8 @@ public class EndGame : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player" && bonus_to_params.bonuscount > 0)
         {
+            bonus_to_params.win = true;
             bonus_to_params.LevelWin();
-
         }
     }
 }

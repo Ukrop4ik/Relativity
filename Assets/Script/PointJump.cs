@@ -55,6 +55,18 @@ public class PointJump : MonoBehaviour {
                     gameObject.transform.SetParent(null);
                     
                 }
+                if (hit.collider.gameObject.tag == "Whole")
+                {
+                    GameObject player = GameObject.FindGameObjectWithTag("Player");
+                    float dist;
+                    dist = Vector3.Distance(player.transform.position, hit.collider.gameObject.transform.position);
+
+                    if (dist <= Max_join_dist)
+                    {
+                        hit.collider.gameObject.GetComponent<Whole>().OnPlayerClick();
+                    }
+                
+                }
             }
         }
 
