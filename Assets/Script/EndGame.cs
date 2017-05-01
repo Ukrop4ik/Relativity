@@ -17,6 +17,8 @@ public class EndGame : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player" && bonus_to_params.bonuscount > 0)
         {
+            SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+            manager.PlaySound(AudioEnum.EndLevel);
             bonus_to_params.win = true;
             bonus_to_params.LevelWin();
         }

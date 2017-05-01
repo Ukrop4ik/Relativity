@@ -7,7 +7,8 @@ public class UILevel : MonoBehaviour {
 
     public GameObject LoosePanel;
     public GameObject WinPanel;
-
+    public Color timerred;
+    public Color timerblue;
     bool pause = false;
 
     public Text bonus_text;
@@ -28,7 +29,14 @@ public class UILevel : MonoBehaviour {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         leveltext.text = "LEVEL: " + bonus_to_params.levelnumber.ToString();
     }
-
+    public void SetTimerColorRed()
+    {
+        timetext.color = timerred;
+    }
+    public void SetTimerColorBlue()
+    {
+        timetext.color = timerblue;
+    }
     public void PauseButton()
     {
         if (pause)
@@ -45,7 +53,10 @@ public class UILevel : MonoBehaviour {
     public void UnjoinButton()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+        if (player.transform.parent) manager.PlaySound(AudioEnum.Unjoin);
         player.transform.SetParent(null);
+  
     }
     public void Restart()
     {

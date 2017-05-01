@@ -22,8 +22,11 @@ public class BoomSphere : MonoBehaviour {
             r.materials[0].color = c;
             if (c.g < 0.1f)
             {
+                SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+                manager.PlaySound(AudioEnum.Boom);
                 Instantiate(boomeffect, gameObject.transform.position, Quaternion.identity);
-                Destroy(gameObject.transform.GetChild(0).gameObject); 
+                Destroy(gameObject.transform.GetChild(0).gameObject);
+                Destroy(this.gameObject);
             }
         }
         else if (c.g < 1)

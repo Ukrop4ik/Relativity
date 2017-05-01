@@ -19,6 +19,8 @@ public class LevelParams : MonoBehaviour {
     [Tooltip("1 to 5 level hard")]
     public int hard = 1;
     public bool win = false;
+    private float ticktacktimer = 1f;
+
 
     void Start()
     {
@@ -27,8 +29,10 @@ public class LevelParams : MonoBehaviour {
         bonuslist.AddRange(GameObject.FindGameObjectsWithTag("Bonus"));
     }
 
+
     public void GetBonus()
     {
+       
         if (bonuscount < 3)
         {
             bonuscount++;
@@ -52,9 +56,25 @@ public class LevelParams : MonoBehaviour {
     {
 
         if (!stop) leveltime -= Time.deltaTime;
+        if (leveltime <= 20f)
+        {
+            ui.SetTimerColorRed();
+            ticktacktimer -= Time.deltaTime;
+            if (ticktacktimer <= 0)
+            {
+                SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+                manager.PlaySound(AudioEnum.Time);
+                ticktacktimer = 1f;
+            }
 
+        }
+        else
+        {
+            ui.SetTimerColorBlue();
+        }
         if (leveltime <= 0)
         {
+            ticktacktimer = 1f;
             leveltime = 0;
             LevelFail();
         }
@@ -101,6 +121,8 @@ public class LevelParams : MonoBehaviour {
     [ContextMenu("LevelFail")]
     public void LevelFail()
     {
+        SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+        manager.PlaySound(AudioEnum.Fail);
         stop = true;
         ui.LoosePanel.SetActive(true);
         Destroy(GameObject.Find("Player"));

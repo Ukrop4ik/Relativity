@@ -11,6 +11,8 @@ public class Bonus : MonoBehaviour {
     GameObject normal;
     [SerializeField]
     GameObject agression;
+    public GameObject boomeffect;
+
     void Start()
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
@@ -28,12 +30,20 @@ public class Bonus : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
+            SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+            manager.PlaySound(AudioEnum.Bonus);
+
             if (isEvil)
             {
+                SoundManager managers = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+                managers.PlaySound(AudioEnum.Boom);
+                Instantiate(boomeffect, gameObject.transform.position, Quaternion.identity);
                 bonus_to_params.LevelFail();
             }
 
             bonus_to_params.GetBonus();
+
+
             Debug.Log("Collect!");
             if (bonus_to_params.bonuslist.Contains(this.gameObject))
             {

@@ -9,6 +9,8 @@ public class ExitToMainMenu : MonoBehaviour {
 
     public void Yes()
     {
+        SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+        manager.PlaySound(AudioEnum.Click);
         Time.timeScale = 1;
         GameObject profile = GameObject.Find("Profile");
         Destroy(profile);
@@ -17,12 +19,16 @@ public class ExitToMainMenu : MonoBehaviour {
 
     public void NO()
     {
+        SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+        manager.PlaySound(AudioEnum.Click);
         Time.timeScale = 1;
         panelYesNo.SetActive(false);
     }
 
     public void Click()
     {
+        SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+        manager.PlaySound(AudioEnum.Click);
         Time.timeScale = 0;
         panelYesNo.SetActive(true);
     }
