@@ -18,6 +18,8 @@ public class Whole : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
+            SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+            manager.PlaySound(AudioEnum.Teleport);
             other.gameObject.transform.SetParent(null);
             other.gameObject.transform.position = exit.position;
             warp.Play();
@@ -27,6 +29,8 @@ public class Whole : MonoBehaviour {
 
     public void OnPlayerClick()
     {
+        SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+        manager.PlaySound(AudioEnum.Teleport);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.gameObject.transform.SetParent(null);
         player.gameObject.transform.position = exit.position;

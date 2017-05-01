@@ -13,6 +13,8 @@ public class Activator : MonoBehaviour {
         {
             foreach (GameObject obj in activationobj)
             {
+                SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+                manager.PlaySound(AudioEnum.Teleport);
                 obj.SetActive(true);
                 Instantiate(activeeffect, obj.transform.position, Quaternion.identity);
             }

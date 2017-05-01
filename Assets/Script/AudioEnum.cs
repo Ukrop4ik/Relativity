@@ -10,6 +10,7 @@ public enum AudioEnum  {
     Click,
     Boom,
     Time,
-    Fail
+    Fail,
+    Teleport
     
 }

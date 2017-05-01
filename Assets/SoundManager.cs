@@ -12,6 +12,7 @@ public class SoundManager : MonoBehaviour {
     public AudioSource boom_sound;
     public AudioSource time_sound;
     public AudioSource fail_sound;
+    public AudioSource teleport_sound;
 
     public void PlaySound(AudioEnum auidoenum)
     {
@@ -41,6 +42,9 @@ public class SoundManager : MonoBehaviour {
                 break;
             case AudioEnum.Fail:
                 if (!fail_sound.isPlaying) fail_sound.Play();
+                break;
+            case AudioEnum.Teleport:
+                if (!teleport_sound.isPlaying) teleport_sound.Play();
                 break;
         }
     }
