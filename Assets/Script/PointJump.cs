@@ -7,7 +7,7 @@ public class PointJump : MonoBehaviour {
     GameObject jump;
     public float Max_join_dist;
     LineRenderer joinline;
-
+    GameObject joinobj;
 	// Use this for initialization
 	void Start () {
 
@@ -35,7 +35,7 @@ public class PointJump : MonoBehaviour {
             joinline.enabled = false;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -47,10 +47,21 @@ public class PointJump : MonoBehaviour {
                     float dist = Vector3.Distance(hit.collider.gameObject.transform.position, transform.position);
                     if (dist <= Max_join_dist)
                     {
+                        if (hit.collider.gameObject == joinobj)
+                        {
+                            gameObject.transform.SetParent(null);
+                            joinobj = null;
+                            SoundManager somanager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+                            somanager.PlaySound(AudioEnum.Unjoin);
+
+                            return;
+                        }
+
                         SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
                         manager.PlaySound(AudioEnum.Join);
                         gameObject.transform.SetParent(null);
                         gameObject.transform.SetParent(hit.collider.gameObject.transform);
+                        joinobj = hit.collider.gameObject;
                     }
                 }
                 if (hit.collider.gameObject.tag == "Player")

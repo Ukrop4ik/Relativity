@@ -58,6 +58,11 @@ public class UILevel : MonoBehaviour {
         player.transform.SetParent(null);
   
     }
+    public void ResterButton()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(bonus_to_params.levelnumber.ToString());
+    }
     public void Restart()
     {
         SceneManager.LoadScene(bonus_to_params.levelnumber.ToString());
