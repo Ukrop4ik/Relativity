@@ -20,7 +20,7 @@ public class LevelParams : MonoBehaviour {
     public int hard = 1;
     public bool win = false;
     private float ticktacktimer = 1f;
-
+    private bool defeat = false;
 
     void Start()
     {
@@ -121,7 +121,10 @@ public class LevelParams : MonoBehaviour {
     [ContextMenu("LevelFail")]
     public void LevelFail()
     {
+      
+        if (defeat) return;
         SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+        defeat = true;
         manager.PlaySound(AudioEnum.Fail);
         stop = true;
         ui.LoosePanel.SetActive(true);

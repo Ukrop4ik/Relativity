@@ -67,36 +67,39 @@ public class StartMenu : MonoBehaviour {
                     break;
                 case 1:
                     levelbutton.GetComponent<LevelButton>().starsimage.sprite = stars[1];
+                    levelbutton.GetComponent<LevelButton>().image.color = colors[5];
                     break;
                 case 2:
                     levelbutton.GetComponent<LevelButton>().starsimage.sprite = stars[2];
+                    levelbutton.GetComponent<LevelButton>().image.color = colors[3];
                     break;
                 case 3:
                     levelbutton.GetComponent<LevelButton>().starsimage.sprite = stars[3];
-                    break;
-                default:
-                    break;
-            }
-            switch (scene.levelhard)
-            {
-                case 1:
                     levelbutton.GetComponent<LevelButton>().image.color = colors[1];
                     break;
-                case 2:
-                    levelbutton.GetComponent<LevelButton>().image.color = colors[2];
-                    break;
-                case 3:
-                    levelbutton.GetComponent<LevelButton>().image.color = colors[3];
-                    break;
-                case 4:
-                    levelbutton.GetComponent<LevelButton>().image.color = colors[4];
-                    break;
-                case 5:
-                    levelbutton.GetComponent<LevelButton>().image.color = colors[5];
-                    break;
                 default:
                     break;
             }
+            //switch (scene.levelhard)
+            //{
+            //    case 1:
+            //        levelbutton.GetComponent<LevelButton>().image.color = colors[1];
+            //        break;
+            //    case 2:
+            //        levelbutton.GetComponent<LevelButton>().image.color = colors[2];
+            //        break;
+            //    case 3:
+            //        levelbutton.GetComponent<LevelButton>().image.color = colors[3];
+            //        break;
+            //    case 4:
+            //        levelbutton.GetComponent<LevelButton>().image.color = colors[4];
+            //        break;
+            //    case 5:
+            //        levelbutton.GetComponent<LevelButton>().image.color = colors[5];
+            //        break;
+            //    default:
+            //        break;
+            //}
             buttons.Add(levelbutton);
         }
 
@@ -113,5 +116,10 @@ public class StartMenu : MonoBehaviour {
     void OpenProfile()
     {
 
+    }
+
+    public void CloseGame()
+    {
+        Application.Quit();
     }
 }

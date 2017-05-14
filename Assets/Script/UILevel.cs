@@ -23,7 +23,12 @@ public class UILevel : MonoBehaviour {
 
     public Text timetext;
     public Text leveltext;
-
+    [SerializeField]
+    private Sprite pauseSprite;
+    [SerializeField]
+    private Sprite playSprite;
+    [SerializeField]
+    private Image pausebuttonimage;
     void Start()
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
@@ -41,13 +46,15 @@ public class UILevel : MonoBehaviour {
     {
         if (pause)
         {
+            pausebuttonimage.sprite = pauseSprite;
             Time.timeScale = 1;
-            pause = false;
+            pause = !pause;
         }
         else
         {
+            pausebuttonimage.sprite = playSprite;
             Time.timeScale = 0.001f;
-            pause = true;
+            pause = !pause;
         }
     }
     public void UnjoinButton()
