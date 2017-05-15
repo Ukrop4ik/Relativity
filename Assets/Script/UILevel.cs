@@ -10,12 +10,12 @@ public class UILevel : MonoBehaviour {
     public Color timerred;
     public Color timerblue;
     bool pause = false;
-
+    public Image starprogress;
+ 
     public Text bonus_text;
 
 
     public Sprite[] stars;
-
 
     public Image starpanel;
 
@@ -29,10 +29,21 @@ public class UILevel : MonoBehaviour {
     private Sprite playSprite;
     [SerializeField]
     private Image pausebuttonimage;
+    private float curramount;
+    private float newammount;
     void Start()
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         leveltext.text = "LEVEL: " + bonus_to_params.levelnumber.ToString();
+    }
+    void Update()
+    {
+        if(starprogress.fillAmount != newammount)
+            starprogress.fillAmount = Mathf.Lerp(starprogress.fillAmount, newammount, Time.deltaTime * 2);
+    }
+    public void SetStarsProgress(float amount)
+    {
+        newammount = amount;
     }
     public void SetTimerColorRed()
     {

@@ -21,35 +21,55 @@ public class LevelParams : MonoBehaviour {
     public bool win = false;
     private float ticktacktimer = 1f;
     private bool defeat = false;
+    public int bonuscollect;
+    public int bonusinlevel;
 
+    private int bonustoonestar;
+    private int bonuscollectbuffer;
     void Start()
     {
         endtrigger = GameObject.Find("EndTrigger");
         endtrigger.SetActive(false);
-        bonuslist.AddRange(GameObject.FindGameObjectsWithTag("Bonus"));
+        // bonuslist.AddRange(GameObject.FindGameObjectsWithTag("Bonus"));
+        bonustoonestar = bonusinlevel / 3;
     }
 
 
     public void GetBonus()
     {
-       
-        if (bonuscount < 3)
+        bonuscollect++;
+
+        ui.SetStarsProgress((float)bonuscollect / bonusinlevel);
+
+        if (bonuscollectbuffer < bonustoonestar)
         {
-            bonuscount++;
-            ui.starpanel.sprite = ui.stars[bonuscount - 1];
-            if (bonuscount > 0)
+            bonuscollectbuffer++;
+            if (bonuscollectbuffer == bonustoonestar)
             {
-                endtrigger.SetActive(true);
-            }
-        }        
-        if (bonuscount >= 3)
-        {
-            foreach (GameObject bonus in bonuslist)
-            {
-                Bonus b = bonus.GetComponent<Bonus>();
-                b.SetEvil();
+                ui.starpanel.sprite = ui.stars[bonuscount];
+                bonuscount++;
+                bonuscollectbuffer = 0;
+
+                if (bonuscount == 3)
+                {
+                    ui.SetStarsProgress((float)1);
+
+                    if (bonuslist.Count > 0)
+                        foreach (GameObject bonus in bonuslist)
+                        {
+                            bonus.GetComponent<Bonus>().SetEvil();
+                        }
+                }
             }
         }
+
+        if (bonuscount > 0)
+        {
+            endtrigger.SetActive(true);
+        }
+    
+    
+       
     }
 
     void Update()

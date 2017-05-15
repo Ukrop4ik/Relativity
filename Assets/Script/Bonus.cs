@@ -12,11 +12,16 @@ public class Bonus : MonoBehaviour {
     [SerializeField]
     GameObject agression;
     public GameObject boomeffect;
-
+    public GameObject sparks;
     void Start()
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         if (isEvil) SetEvil();
+        else
+        {
+            bonus_to_params.bonuslist.Add(this.gameObject);
+            bonus_to_params.bonusinlevel++;
+        } 
     }
     public void SetEvil()
     {
@@ -39,9 +44,14 @@ public class Bonus : MonoBehaviour {
                 managers.PlaySound(AudioEnum.Boom);
                 Instantiate(boomeffect, gameObject.transform.position, Quaternion.identity);
                 bonus_to_params.LevelFail();
+
+            }
+            else
+            {
+                bonus_to_params.GetBonus();
+                Instantiate(sparks, transform.position, Quaternion.identity);
             }
 
-            bonus_to_params.GetBonus();
 
 
             Debug.Log("Collect!");
