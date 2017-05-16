@@ -12,6 +12,7 @@ public class LevelParams : MonoBehaviour {
     [SerializeField]
     public int levelnumber;
     public float leveltime = 100;
+    public float maxleveltime;
     GameObject endtrigger;
     private List<int> nums = new List<int>();
     public int bonuscount;
@@ -23,17 +24,50 @@ public class LevelParams : MonoBehaviour {
     private bool defeat = false;
     public int bonuscollect;
     public int bonusinlevel;
-
+    public int playerHealth = 100;
     private int bonustoonestar;
     private int bonuscollectbuffer;
     void Start()
     {
+        ui.SetHpProgress((float)playerHealth / 100);
         endtrigger = GameObject.Find("EndTrigger");
         endtrigger.SetActive(false);
         // bonuslist.AddRange(GameObject.FindGameObjectsWithTag("Bonus"));
+        Invoke("SetStarToBonus", 0.5f);
+        maxleveltime = leveltime;
+    }
+    public float GetTimeAmount()
+    {
+        if (leveltime > 0)
+            return (float)leveltime / maxleveltime;
+        else
+            return 0f;
+    }
+    void SetStarToBonus()
+    {
         bonustoonestar = bonusinlevel / 3;
     }
 
+    public void Damage(int value)
+    {
+        playerHealth -= value;
+        ui.SetHpProgress((float)playerHealth / 100);
+        if (playerHealth <= 0)
+        {
+            playerHealth = 0;
+            LevelFail();
+        }
+    }
+
+    public void Health(int value)
+    {
+        playerHealth += value;
+        ui.SetHpProgress((float)playerHealth / 100);
+        if (playerHealth >= 100)
+        {
+            playerHealth = 100;
+        }
+    }
 
     public void GetBonus()
     {

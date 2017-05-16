@@ -30,6 +30,8 @@ public class TimerBonus : MonoBehaviour {
         {
             SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
             LevelParams.leveltime += isEvil ? -Value : Value;
+            if (LevelParams.leveltime > LevelParams.maxleveltime)
+                LevelParams.maxleveltime = LevelParams.leveltime;
             Destroy(this.gameObject);
 
         }

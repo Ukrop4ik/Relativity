@@ -5,7 +5,7 @@ public class Bonus : MonoBehaviour {
 
     LevelParams bonus_to_params;
     [SerializeField]
-    int bonus_value;
+    int bonus_value = 35;
     public bool isEvil;
     [SerializeField]
     GameObject normal;
@@ -15,6 +15,7 @@ public class Bonus : MonoBehaviour {
     public GameObject sparks;
     void Start()
     {
+        bonus_value = 35;
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         if (isEvil) SetEvil();
         else
@@ -35,21 +36,24 @@ public class Bonus : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
-            manager.PlaySound(AudioEnum.Bonus);
 
             if (isEvil)
             {
                 SoundManager managers = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
                 managers.PlaySound(AudioEnum.Boom);
                 Instantiate(boomeffect, gameObject.transform.position, Quaternion.identity);
-                bonus_to_params.LevelFail();
+                bonus_to_params.Damage(bonus_value);
 
             }
             else
             {
+                SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+                manager.PlaySound(AudioEnum.Bonus);
                 bonus_to_params.GetBonus();
+                if (transform.root == null)
                 Instantiate(sparks, transform.position, Quaternion.identity);
+                else
+                    Instantiate(sparks, transform.localPosition, Quaternion.identity);
             }
 
 

@@ -29,8 +29,13 @@ public class UILevel : MonoBehaviour {
     private Sprite playSprite;
     [SerializeField]
     private Image pausebuttonimage;
+    [SerializeField]
+    private Image timebar;
+    [SerializeField]
+    private Image hpbar;
     private float curramount;
     private float newammount;
+    private float newHPammount;
     void Start()
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
@@ -39,7 +44,15 @@ public class UILevel : MonoBehaviour {
     void Update()
     {
         if(starprogress.fillAmount != newammount)
-            starprogress.fillAmount = Mathf.Lerp(starprogress.fillAmount, newammount, Time.deltaTime * 2);
+            starprogress.fillAmount = Mathf.Lerp(starprogress.fillAmount, newammount, Time.deltaTime * 2f);
+        if (hpbar.fillAmount != newHPammount)
+            hpbar.fillAmount = Mathf.Lerp(hpbar.fillAmount, newHPammount, Time.deltaTime * 10f);
+
+        timebar.fillAmount = Mathf.Lerp(timebar.fillAmount, bonus_to_params.GetTimeAmount(), Time.deltaTime * 5f); 
+    }
+    public void SetHpProgress(float amount)
+    {
+        newHPammount = amount;
     }
     public void SetStarsProgress(float amount)
     {

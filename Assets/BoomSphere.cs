@@ -8,7 +8,8 @@ public class BoomSphere : MonoBehaviour {
     Renderer r;
     public float timescale = 0;
     public GameObject boomeffect;
-
+    private LevelParams bonus_to_params;
+    public int damagevalue = 50;
     void Start()
     {
         c = gameObject.GetComponent<Renderer>().materials[0].color;
@@ -25,8 +26,9 @@ public class BoomSphere : MonoBehaviour {
                 SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
                 manager.PlaySound(AudioEnum.Boom);
                 Instantiate(boomeffect, gameObject.transform.position, Quaternion.identity);
-                Destroy(gameObject.transform.GetChild(0).gameObject);
-                Destroy(this.gameObject);
+                gameObject.transform.GetChild(0).SetParent(null);
+                bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
+                bonus_to_params.Damage(damagevalue);
             }
         }
         else if (c.g < 1)
