@@ -18,7 +18,7 @@ public class CameraMotion : MonoBehaviour {
 
         if (this.transform.position.y > 35f)
             this.transform.position = new Vector3(transform.position.x, Mathf.Lerp(transform.position.y , 35f, Time.deltaTime*0.8f), player.position.z + 5f);
-        this.transform.position = new Vector3(transform.position.x, transform.position.y, player.position.z + 5f);
+        this.transform.position = new Vector3(player.position.x, transform.position.y, player.position.z + 5f);
 
 
     }

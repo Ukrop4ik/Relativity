@@ -53,7 +53,9 @@ public class UILevel : MonoBehaviour {
     }
     void Update()
     {
-        if(starprogress.fillAmount != newammount)
+        if (pause)
+            Time.timeScale = 0.001f;
+        if (starprogress.fillAmount != newammount)
             starprogress.fillAmount = Mathf.Lerp(starprogress.fillAmount, newammount, Time.deltaTime * 2f);
         if (hpbar.fillAmount != newHPammount)
             hpbar.fillAmount = Mathf.Lerp(hpbar.fillAmount, newHPammount, Time.deltaTime * 10f);
@@ -87,7 +89,6 @@ public class UILevel : MonoBehaviour {
         else
         {
             pausebuttonimage.sprite = playSprite;
-            Time.timeScale = 0.001f;
             pause = !pause;
         }
     }

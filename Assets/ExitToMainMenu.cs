@@ -7,6 +7,14 @@ public class ExitToMainMenu : MonoBehaviour {
 
     public GameObject panelYesNo;
 
+    void Update()
+    {
+        if (panelYesNo.activeInHierarchy)
+        {
+            Time.timeScale = 0;
+        }
+    }
+
     public void Yes()
     {
         SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
@@ -29,7 +37,6 @@ public class ExitToMainMenu : MonoBehaviour {
     {
         SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
         manager.PlaySound(AudioEnum.Click);
-        Time.timeScale = 0;
         panelYesNo.SetActive(true);
     }
 }
