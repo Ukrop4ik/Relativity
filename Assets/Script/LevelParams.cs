@@ -27,6 +27,7 @@ public class LevelParams : MonoBehaviour {
     public int playerHealth = 100;
     private int bonustoonestar;
     private int bonuscollectbuffer;
+
     void Start()
     {
         ui.SetHpProgress((float)playerHealth / 100);
@@ -35,6 +36,8 @@ public class LevelParams : MonoBehaviour {
         // bonuslist.AddRange(GameObject.FindGameObjectsWithTag("Bonus"));
         Invoke("SetStarToBonus", 0.5f);
         maxleveltime = leveltime;
+        Camera.main.gameObject.AddComponent<CameraMotion>();
+        Debug.Log("Skill value at: >> " + PlayerPrefs.GetInt("skill_value"));
     }
     public float GetTimeAmount()
     {

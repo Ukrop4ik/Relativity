@@ -32,14 +32,24 @@ public class UILevel : MonoBehaviour {
     [SerializeField]
     private Image timebar;
     [SerializeField]
+    private Text skill_value_text;
+    [SerializeField]
     private Image hpbar;
     private float curramount;
     private float newammount;
     private float newHPammount;
+
     void Start()
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         leveltext.text = "LEVEL: " + bonus_to_params.levelnumber.ToString();
+
+        ShowSkills();
+    }
+
+    public void ShowSkills()
+    {
+        skill_value_text.text = PlayerPrefs.GetInt("skill_value").ToString();
     }
     void Update()
     {

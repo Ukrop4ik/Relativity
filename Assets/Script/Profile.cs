@@ -12,6 +12,14 @@ public class Profile : MonoBehaviour {
     public int levelcount;
     public string[] sceneid;
 
+    void Awake()
+    {
+        if (!PlayerPrefs.HasKey("skill_value"))
+        {
+            PlayerPrefs.SetInt("skill_value", 4);
+            PlayerPrefs.Save();
+        }
+    }
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
