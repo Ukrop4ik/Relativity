@@ -18,6 +18,7 @@ public class CheatMenu : MonoBehaviour {
     void Start()
     {
         Lparams = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
+
     }
     public void WinLevel()
     {

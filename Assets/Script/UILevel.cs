@@ -35,6 +35,12 @@ public class UILevel : MonoBehaviour {
     private Text skill_value_text;
     [SerializeField]
     private Image hpbar;
+    [SerializeField]
+    private GameObject boosttextwithwin;
+    [SerializeField]
+    private GameObject rewardvideopanel;
+    [SerializeField]
+    private GameObject finalrewardvideopanel;
     private float curramount;
     private float newammount;
     private float newHPammount;
@@ -46,10 +52,45 @@ public class UILevel : MonoBehaviour {
 
         ShowSkills();
     }
-
+    public void ShowWinBooster()
+    {
+        boosttextwithwin.SetActive(true);
+    }
+    public void OpenRewardPanel()
+    {
+        pause = true;
+        rewardvideopanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void OpenRewardFinalPanel()
+    {
+        pause = true;
+        finalrewardvideopanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void CloseGetReward()
+    {
+        pause = false;
+        finalrewardvideopanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+    public void CloseReward()
+    {
+        pause = false;
+        rewardvideopanel.SetActive(false);
+        Time.timeScale = 1;
+    }
     public void ShowSkills()
     {
         skill_value_text.text = PlayerPrefs.GetInt("skill_value").ToString();
+        if (PlayerPrefs.GetInt("skill_value") == 0)
+        {
+            skill_value_text.color = timerred;
+        }
+        else
+        {
+            skill_value_text.color = Color.black;
+        }
     }
     void Update()
     {

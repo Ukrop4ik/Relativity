@@ -13,7 +13,11 @@ public class Skills : MonoBehaviour {
     }
     public void TimeButton()
     {
-        if (PlayerPrefs.GetInt("skill_value") == 0) return;
+        if (PlayerPrefs.GetInt("skill_value") == 0)
+        {
+            ui.OpenRewardPanel();
+            return;
+        }
         Lparams.leveltime += 20f;
         if (Lparams.leveltime > Lparams.maxleveltime)
             Lparams.maxleveltime = Lparams.leveltime;
@@ -21,13 +25,21 @@ public class Skills : MonoBehaviour {
     }
     public void HPButton()
     {
-        if (PlayerPrefs.GetInt("skill_value") == 0) return;
+        if (PlayerPrefs.GetInt("skill_value") == 0)
+        {
+            ui.OpenRewardPanel();
+            return;
+        } 
         Lparams.Health(100);
         SetSkill();
     }
     public void CollectButton()
     {
-        if (PlayerPrefs.GetInt("skill_value") == 0) return;
+        if (PlayerPrefs.GetInt("skill_value") == 0)
+        {
+            ui.OpenRewardPanel();
+            return;
+        }
     }
 
     void SetSkill()

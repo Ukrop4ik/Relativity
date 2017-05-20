@@ -12,22 +12,28 @@ public class LevelParams : MonoBehaviour {
     [SerializeField]
     public int levelnumber;
     public float leveltime = 100;
+    [HideInInspector]
     public float maxleveltime;
     GameObject endtrigger;
     private List<int> nums = new List<int>();
+    [HideInInspector]
     public int bonuscount;
     bool stop = false;
-    [Tooltip("1 to 5 level hard")]
+    [HideInInspector]
     public int hard = 1;
+    [HideInInspector]
     public bool win = false;
     private float ticktacktimer = 1f;
     private bool defeat = false;
+    [HideInInspector]
     public int bonuscollect;
+    [HideInInspector]
     public int bonusinlevel;
+    [HideInInspector]
     public int playerHealth = 100;
     private int bonustoonestar;
     private int bonuscollectbuffer;
-
+    public int levelscore = 1;
     void Start()
     {
         ui.SetHpProgress((float)playerHealth / 100);
@@ -142,6 +148,9 @@ public class LevelParams : MonoBehaviour {
     [ContextMenu("LevelWin")]
     public void LevelWin()
     {
+        int score = levelscore;
+        int stars;
+
         Destroy(GameObject.Find("Player"));
         Profile profile = GameObject.Find("Profile").gameObject.GetComponent<Profile>();
         JsonData data = DataLoad();
@@ -151,7 +160,32 @@ public class LevelParams : MonoBehaviour {
         {
             if ((int)data["Levels"][i]["levelnumber"] == levelnumber)
             {
-                LevelData lev = new LevelData(levelnumber, bonuscount, 0, 0, hard);
+
+                if (bonuscount >= (int)data["Levels"][i]["levelstars"])
+                {
+                    stars = bonuscount;
+                }
+                else
+                {
+                    stars = (int)data["Levels"][i]["levelstars"];
+                }
+
+                if (bonuscount > 2 && (int)data["Levels"][i]["levelscore"] == 0)
+                {
+                    int skillvalue = PlayerPrefs.GetInt("skill_value");
+                    skillvalue += 1;
+                    PlayerPrefs.SetInt("skill_value", skillvalue);
+                    PlayerPrefs.Save();
+                    ui.ShowSkills();
+                    score = 1;
+                    ui.ShowWinBooster();
+                }
+                else
+                {
+                    score = 0;
+                }
+
+                LevelData lev = new LevelData(levelnumber, stars, score, 0, hard);
                 levels.Add(lev);
                 nums.Add(i);
                 continue;
@@ -165,7 +199,23 @@ public class LevelParams : MonoBehaviour {
 
         if (!nums.Contains(levelnumber))
         {
-            LevelData newlevel = new LevelData(levelnumber, bonuscount, 0, 0, hard);
+
+            if (bonuscount > 2)
+            {
+                int skillvalue = PlayerPrefs.GetInt("skill_value");
+                skillvalue += 1;
+                PlayerPrefs.SetInt("skill_value", skillvalue);
+                PlayerPrefs.Save();
+                ui.ShowSkills();
+                score = 1;
+                ui.ShowWinBooster();
+            }
+            else
+            {
+                score = 0;
+            }
+
+            LevelData newlevel = new LevelData(levelnumber, bonuscount, score, 0, hard);
             levels.Add(newlevel);
         }
 
