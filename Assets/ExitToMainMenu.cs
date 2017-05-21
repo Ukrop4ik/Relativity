@@ -7,13 +7,6 @@ public class ExitToMainMenu : MonoBehaviour {
 
     public GameObject panelYesNo;
 
-    void Update()
-    {
-        if (panelYesNo.activeInHierarchy)
-        {
-            Time.timeScale = 0;
-        }
-    }
 
     public void Yes()
     {

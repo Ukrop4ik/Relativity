@@ -18,6 +18,7 @@ public class StartMenu : MonoBehaviour {
     void Start()
     {
         profile = GameObject.Find("Profile").gameObject.GetComponent<Profile>();
+        Time.timeScale = 1;
     }
 
     public void CloseLevelPanel()
@@ -59,6 +60,7 @@ public class StartMenu : MonoBehaviour {
             GameObject levelbutton = Instantiate(buttonpref);
             levelbutton.transform.SetParent(levelpanelcontent);
             levelbutton.GetComponent<LevelButton>().id = scene.levelnumber.ToString();
+            levelbutton.transform.localScale = new Vector3(1,1,1);
             
             switch (scene.levelstars)
             {
@@ -111,6 +113,7 @@ public class StartMenu : MonoBehaviour {
         buttonnew.GetComponent<LevelButton>().id = profile.levels.Count.ToString();
         buttonnew.GetComponent<LevelButton>().starsimage.sprite = stars[0];
         buttonnew.GetComponent<LevelButton>().centerimage.sprite = uncnoun;
+        buttonnew.transform.localScale = new Vector3(1, 1, 1);
     }
 
     void OpenProfile()

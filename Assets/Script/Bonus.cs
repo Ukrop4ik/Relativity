@@ -67,4 +67,24 @@ public class Bonus : MonoBehaviour {
             
         }
     }
+
+    public void ManualCollect()
+    {
+        if (!isEvil)
+        {
+            SoundManager manager = GameObject.FindGameObjectWithTag("SoundSystem").GetComponent<SoundManager>();
+            manager.PlaySound(AudioEnum.Bonus);
+            bonus_to_params.GetBonus();
+            if (transform.root == null)
+                Instantiate(sparks, transform.position, Quaternion.identity);
+            else
+                Instantiate(sparks, transform.localPosition, Quaternion.identity);
+
+            if (bonus_to_params.bonuslist.Contains(this.gameObject))
+            {
+                bonus_to_params.bonuslist.Remove(this.gameObject);
+            }
+            Destroy(gameObject);
+        }
+    }
 }

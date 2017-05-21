@@ -16,7 +16,7 @@ public class Profile : MonoBehaviour {
     {
         if (!PlayerPrefs.HasKey("skill_value"))
         {
-            PlayerPrefs.SetInt("skill_value", 4);
+            PlayerPrefs.SetInt("skill_value", 3);
             PlayerPrefs.Save();
         }
     }

@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
+using System;
 
 public class UILevel : MonoBehaviour {
 
@@ -45,11 +48,14 @@ public class UILevel : MonoBehaviour {
     private float newammount;
     private float newHPammount;
 
+    [SerializeField]
+    private List<GameObject> arrowstoreward = new List<GameObject>();
+
     void Start()
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         leveltext.text = "LEVEL: " + bonus_to_params.levelnumber.ToString();
-
+        PauseButton();
         ShowSkills();
     }
     public void ShowWinBooster()
@@ -86,16 +92,29 @@ public class UILevel : MonoBehaviour {
         if (PlayerPrefs.GetInt("skill_value") == 0)
         {
             skill_value_text.color = timerred;
+            ShowArrow(true);
         }
         else
         {
             skill_value_text.color = Color.black;
+            ShowArrow(false);
         }
     }
     void Update()
     {
         if (pause)
+        {
+            pausebuttonimage.sprite = playSprite;
             Time.timeScale = 0.001f;
+        }
+
+        else
+        {
+            pausebuttonimage.sprite = pauseSprite;
+
+            Time.timeScale = 1f;
+        }
+         
         if (starprogress.fillAmount != newammount)
             starprogress.fillAmount = Mathf.Lerp(starprogress.fillAmount, newammount, Time.deltaTime * 2f);
         if (hpbar.fillAmount != newHPammount)
@@ -123,14 +142,13 @@ public class UILevel : MonoBehaviour {
     {
         if (pause)
         {
-            pausebuttonimage.sprite = pauseSprite;
-            Time.timeScale = 1;
-            pause = !pause;
+
+            pause = false;
         }
         else
         {
-            pausebuttonimage.sprite = playSprite;
-            pause = !pause;
+
+            pause = true;
         }
     }
     public void UnjoinButton()
@@ -143,7 +161,7 @@ public class UILevel : MonoBehaviour {
     }
     public void ResterButton()
     {
-        Time.timeScale = 1;
+        pause = false;
         SceneManager.LoadScene(bonus_to_params.levelnumber.ToString());
     }
     public void Restart()
@@ -156,9 +174,21 @@ public class UILevel : MonoBehaviour {
     }
     public void ToMainMenu()
     {
+        pause = false;
         GameObject profile = GameObject.Find("Profile");
         Destroy(profile);
         SceneManager.LoadScene("Menu");
     }
+    public void ShowArrow(bool isShow)
+    {
+        foreach (GameObject obj in arrowstoreward)
+        {
+            if (isShow)
+                obj.SetActive(true);
+            else
+                obj.SetActive(false);
+        }
+    }
+
 
 }

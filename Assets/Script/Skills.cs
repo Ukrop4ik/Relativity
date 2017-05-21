@@ -31,15 +31,30 @@ public class Skills : MonoBehaviour {
             return;
         } 
         Lparams.Health(100);
-        SetSkill();
+        if (Lparams.playerHealth < 100) SetSkill();
     }
     public void CollectButton()
     {
+        bool collectable = false;
         if (PlayerPrefs.GetInt("skill_value") == 0)
         {
             ui.OpenRewardPanel();
             return;
         }
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        List<GameObject> bonuslist = new List<GameObject>();
+        bonuslist.AddRange(Lparams.bonuslist);
+
+        foreach (GameObject obj in bonuslist)
+        {
+            if (Vector3.Distance(obj.transform.position, player.transform.position) <= player.GetComponent<PointJump>().Max_join_dist)
+            {
+                obj.GetComponent<Bonus>().ManualCollect();
+                collectable = true;
+            }
+        }
+        if (collectable) SetSkill();
     }
 
     void SetSkill()

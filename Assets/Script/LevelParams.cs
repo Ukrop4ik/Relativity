@@ -33,7 +33,7 @@ public class LevelParams : MonoBehaviour {
     public int playerHealth = 100;
     private int bonustoonestar;
     private int bonuscollectbuffer;
-    public int levelscore = 1;
+    public int levelscore;
     void Start()
     {
         ui.SetHpProgress((float)playerHealth / 100);
@@ -170,7 +170,7 @@ public class LevelParams : MonoBehaviour {
                     stars = (int)data["Levels"][i]["levelstars"];
                 }
 
-                if (bonuscount > 2 && (int)data["Levels"][i]["levelscore"] == 0)
+                if (bonuscount > 2 && (int)data["Levels"][i]["levelscore"] == 0 && score > 0)
                 {
                     int skillvalue = PlayerPrefs.GetInt("skill_value");
                     skillvalue += 1;
@@ -200,7 +200,7 @@ public class LevelParams : MonoBehaviour {
         if (!nums.Contains(levelnumber))
         {
 
-            if (bonuscount > 2)
+            if (bonuscount > 2 && levelscore > 0)
             {
                 int skillvalue = PlayerPrefs.GetInt("skill_value");
                 skillvalue += 1;

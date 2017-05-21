@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.EventSystems;
+using System;
 
 public class PointJump : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PointJump : MonoBehaviour
     int layermask = 1 << 5;
     bool startdrag = false;
     // Use this for initialization
+
+    bool isUi;
     void Start()
     {
 
@@ -39,13 +42,17 @@ public class PointJump : MonoBehaviour
             RaycastHit hit1;
             if (Physics.Raycast(ray1, out hit1, 1000, layermask))
             {
+
                 if (Vector3.Distance(new Vector3(hit1.point.x, 0, hit1.point.z), gameObject.transform.position) <= Max_join_dist + 2f)
                 {
                     joinline.SetPosition(1, new Vector3(hit1.point.x, 0, hit1.point.z));
                     joinline.enabled = true;
                 }
+                if (Vector3.Distance(new Vector3(hit1.point.x, 0, hit1.point.z), gameObject.transform.position) <= 15f)
+                {
+                    gameObject.transform.SetParent(null);
+                }
 
-                gameObject.transform.SetParent(null);
                 Time.timeScale = Mathf.Lerp(Time.timeScale, timescale, Time.deltaTime * 2);
             }
             else
@@ -125,6 +132,7 @@ public class PointJump : MonoBehaviour
             }
         }
     }
+
 }
 
     
