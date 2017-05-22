@@ -66,4 +66,17 @@ public class Skills : MonoBehaviour {
         ui.ShowSkills();
     }
 
+    public void SkipLevelForBonus(GameObject panel)
+    {
+        int skillvalue = PlayerPrefs.GetInt("skill_value");
+        skillvalue -= 3;
+        PlayerPrefs.SetInt("skill_value", skillvalue);
+        PlayerPrefs.Save();
+        ui.ShowSkills();
+        Lparams.bonuscount = 1;
+        Lparams.win = true;
+        panel.SetActive(false);
+        Lparams.LevelWin();
+    }
+
 }

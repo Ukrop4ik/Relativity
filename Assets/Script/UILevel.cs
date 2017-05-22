@@ -55,7 +55,7 @@ public class UILevel : MonoBehaviour {
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         leveltext.text = "LEVEL: " + bonus_to_params.levelnumber.ToString();
-        PauseButton();
+       // PauseButton();
         ShowSkills();
     }
     public void ShowWinBooster()
@@ -108,7 +108,7 @@ public class UILevel : MonoBehaviour {
             Time.timeScale = 0.001f;
         }
 
-        else
+        else if (!Input.GetMouseButton(0))
         {
             pausebuttonimage.sprite = pauseSprite;
 
@@ -188,6 +188,14 @@ public class UILevel : MonoBehaviour {
             else
                 obj.SetActive(false);
         }
+    }
+
+    public void SkipLevel()
+    {
+        bonus_to_params.bonuscount = 1;
+        bonus_to_params.win = true;
+        LoosePanel.SetActive(false);
+        bonus_to_params.LevelWin();
     }
 
 

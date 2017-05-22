@@ -17,7 +17,6 @@ public class VersoinControll : MonoBehaviour {
                 File.Delete(Application.persistentDataPath + "/" + "RelatyvityProfile" + ".json");
             }
 
-            PlayerPrefs.SetInt("skill_value", 0);
             PlayerPrefs.SetInt("version", version);
             PlayerPrefs.Save();
 

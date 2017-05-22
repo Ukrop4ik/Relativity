@@ -37,6 +37,9 @@ public class PointJump : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+
+            Time.timeScale = Mathf.Lerp(Time.timeScale, timescale, Time.deltaTime * 2);
+
             startdrag = true;
             Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit1;
@@ -48,12 +51,17 @@ public class PointJump : MonoBehaviour
                     joinline.SetPosition(1, new Vector3(hit1.point.x, 0, hit1.point.z));
                     joinline.enabled = true;
                 }
+                else
+                {
+                    joinline.SetPosition(1, gameObject.transform.position);
+                    joinline.enabled = false;
+                }
                 if (Vector3.Distance(new Vector3(hit1.point.x, 0, hit1.point.z), gameObject.transform.position) <= 15f)
                 {
                     gameObject.transform.SetParent(null);
+                    joinobj = null;
                 }
 
-                Time.timeScale = Mathf.Lerp(Time.timeScale, timescale, Time.deltaTime * 2);
             }
             else
             {
@@ -87,6 +95,7 @@ public class PointJump : MonoBehaviour
                 if (hit.collider.gameObject.tag == "Player")
                 {
                     gameObject.transform.SetParent(null);
+                    joinobj = null;
 
                 }
                 if (hit.collider.gameObject.tag == "" && gameObject.transform.parent != null)
@@ -116,7 +125,7 @@ public class PointJump : MonoBehaviour
                 return;
             }
 
-            Time.timeScale = 1;
+
 
         }
 

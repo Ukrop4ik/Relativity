@@ -4,6 +4,7 @@ using UnityEngine.Advertisements;
 public class VideoReward : MonoBehaviour
 {
     UILevel ui;
+    public bool skiplevelvideo = false;
 
     void Start()
     {
@@ -26,13 +27,21 @@ public class VideoReward : MonoBehaviour
             case ShowResult.Finished:
                 Debug.Log("The ad was successfully shown.");
 
-                int skillvalue = PlayerPrefs.GetInt("skill_value");
-                skillvalue += 3;
-                PlayerPrefs.SetInt("skill_value", skillvalue);
-                PlayerPrefs.Save();
-                ui.ShowSkills();
-                ui.CloseReward();
-                ui.OpenRewardFinalPanel();
+                if (skiplevelvideo)
+                {
+                    ui.SkipLevel();
+                    skiplevelvideo = false;
+                }
+                else
+                {
+                    int skillvalue = PlayerPrefs.GetInt("skill_value");
+                    skillvalue += 3;
+                    PlayerPrefs.SetInt("skill_value", skillvalue);
+                    PlayerPrefs.Save();
+                    ui.ShowSkills();
+                    ui.CloseReward();
+                    ui.OpenRewardFinalPanel();
+                }
                 break;
             case ShowResult.Skipped:
                 Debug.Log("The ad was skipped before reaching the end.");
@@ -41,5 +50,10 @@ public class VideoReward : MonoBehaviour
                 Debug.LogError("The ad failed to be shown.");
                 break;
         }
+    }
+
+    public void SetSkipBool(bool value)
+    {
+        skiplevelvideo = value;
     }
 }
