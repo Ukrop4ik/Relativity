@@ -42,7 +42,11 @@ public class LevelParams : MonoBehaviour {
         // bonuslist.AddRange(GameObject.FindGameObjectsWithTag("Bonus"));
         Invoke("SetStarToBonus", 0.5f);
         maxleveltime = leveltime;
-        Camera.main.gameObject.AddComponent<CameraMotion>();
+        GameObject cameraroot = Instantiate(new GameObject(), Camera.main.transform.position, Quaternion.identity);
+        cameraroot.name = "CAMERA_ROOT";
+        Camera.main.transform.rotation = Quaternion.Euler(60, 0, 0);
+        Camera.main.gameObject.transform.SetParent(cameraroot.transform);
+        cameraroot.AddComponent<CameraMotion>();
         Debug.Log("Skill value at: >> " + PlayerPrefs.GetInt("skill_value"));
     }
     public float GetTimeAmount()
