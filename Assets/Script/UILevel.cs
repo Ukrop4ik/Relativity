@@ -55,7 +55,7 @@ public class UILevel : MonoBehaviour {
     {
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         leveltext.text = "LEVEL: " + bonus_to_params.levelnumber.ToString();
-       // PauseButton();
+        PauseButton();
         ShowSkills();
     }
     public void ShowWinBooster()
