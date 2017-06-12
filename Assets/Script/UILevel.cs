@@ -14,7 +14,7 @@ public class UILevel : MonoBehaviour {
     public Color timerblue;
     bool pause = false;
     public Image starprogress;
- 
+
     public Text bonus_text;
 
 
@@ -53,6 +53,7 @@ public class UILevel : MonoBehaviour {
 
     void Start()
     {
+
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         leveltext.text = "LEVEL: " + bonus_to_params.levelnumber.ToString();
         PauseButton();
@@ -61,6 +62,12 @@ public class UILevel : MonoBehaviour {
     public void ShowWinBooster()
     {
         boosttextwithwin.SetActive(true);
+    }
+    public void RemoveArrow(GameObject arrow)
+    {
+        if (!arrow) return;
+        if (!arrow.activeInHierarchy) return;
+        arrow.SetActive(false);
     }
     public void OpenRewardPanel()
     {
@@ -114,13 +121,13 @@ public class UILevel : MonoBehaviour {
 
             Time.timeScale = 1f;
         }
-         
+
         if (starprogress.fillAmount != newammount)
             starprogress.fillAmount = Mathf.Lerp(starprogress.fillAmount, newammount, Time.deltaTime * 2f);
         if (hpbar.fillAmount != newHPammount)
             hpbar.fillAmount = Mathf.Lerp(hpbar.fillAmount, newHPammount, Time.deltaTime * 10f);
 
-        timebar.fillAmount = Mathf.Lerp(timebar.fillAmount, bonus_to_params.GetTimeAmount(), Time.deltaTime * 5f); 
+        timebar.fillAmount = Mathf.Lerp(timebar.fillAmount, bonus_to_params.GetTimeAmount(), Time.deltaTime * 5f);
     }
     public void SetHpProgress(float amount)
     {
@@ -150,6 +157,11 @@ public class UILevel : MonoBehaviour {
 
             pause = true;
         }
+    }
+
+    public void PauseControl(bool value)
+    {
+        pause = value;
     }
     public void UnjoinButton()
     {

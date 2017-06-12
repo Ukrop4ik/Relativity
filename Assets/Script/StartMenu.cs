@@ -9,6 +9,7 @@ public class StartMenu : MonoBehaviour {
     public GameObject MainMenueUI;
     public GameObject LevelPanel;
     public Transform levelpanelcontent;
+    public GameObject LangPanel;
     private List<GameObject> buttons = new List<GameObject>();
     Profile profile;
     public Sprite[] stars;
@@ -29,7 +30,7 @@ public class StartMenu : MonoBehaviour {
     {
         MainMenueUI.SetActive(!MainMenueUI.activeInHierarchy);
         LevelPanel.SetActive(!LevelPanel.activeInHierarchy);
-
+        LangPanel.SetActive(!LangPanel.activeInHierarchy);
 
         if (LevelPanel.activeInHierarchy)
         {
