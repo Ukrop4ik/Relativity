@@ -5,19 +5,21 @@ public class LineMotionPro : MonoBehaviour {
     public GameObject StartTarget;
     public GameObject EndTarget;
     public float TimeOfOneTrace = 1;
-
+    public bool isActive = true;
     private float _t = 0;
 
     // Use this for initialization
     void Start()
     {
+        if (!StartTarget) return;
 
+        transform.position = StartTarget.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!StartTarget || !EndTarget) return;
+        if (!StartTarget || !EndTarget || !isActive) return;
 
         if (TimeOfOneTrace < 0.001)
         {

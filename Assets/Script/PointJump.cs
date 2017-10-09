@@ -90,6 +90,7 @@ public class PointJump : MonoBehaviour
                         gameObject.transform.SetParent(null);
                         gameObject.transform.SetParent(hit.collider.gameObject.transform);
                         joinobj = hit.collider.gameObject;
+                        hit.collider.gameObject.GetComponent<LineMotionPro>().isActive = true;
                     }
                 }
                 if (hit.collider.gameObject.tag == "Player")
