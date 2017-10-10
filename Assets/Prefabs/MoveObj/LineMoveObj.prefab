@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 434532}
-  - component: {fileID: 3343826}
   - component: {fileID: 13595026}
   - component: {fileID: 9687782}
   - component: {fileID: 11497832}
@@ -36,13 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3343826
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 137270}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!96 &9687782
 TrailRenderer:
   serializedVersion: 2
@@ -148,7 +140,7 @@ MonoBehaviour:
   StartTarget: {fileID: 0}
   EndTarget: {fileID: 0}
   TimeOfOneTrace: 8
-  isActive: 1
+  isActive: 0
 --- !u!135 &13595026
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -393,7 +385,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1812146910992312}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 2b142bc42287389419fe673c76206d45, type: 3}
 --- !u!108 &108020878163755258
 Light:
   m_ObjectHideFlags: 1
