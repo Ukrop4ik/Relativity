@@ -29,7 +29,6 @@ public class Bonus : MonoBehaviour {
         isEvil = true;
         normal.SetActive(false);
         agression.SetActive(true);
-        gameObject.GetComponent<Renderer>().material.color = Color.red;
     }
 
     void OnTriggerEnter(Collider other)
