@@ -15,7 +15,7 @@ public class Bonus : MonoBehaviour {
     public GameObject sparks;
     void Start()
     {
-        bonus_value = 35;
+        if (bonus_value < 35) bonus_value = 35;
         bonus_to_params = GameObject.FindGameObjectWithTag("LevelParams").GetComponent<LevelParams>();
         if (isEvil) SetEvil();
         else
