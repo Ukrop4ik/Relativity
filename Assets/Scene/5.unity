@@ -966,13 +966,13 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1206,6 +1206,16 @@ Prefab:
     - target: {fileID: 144594, guid: 4e5d75deec6a5cb4b94f38e6607ed9e2, type: 2}
       propertyPath: m_Name
       value: Bonus (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23069597880284532, guid: 4e5d75deec6a5cb4b94f38e6607ed9e2,
+        type: 2}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23069597880284532, guid: 4e5d75deec6a5cb4b94f38e6607ed9e2,
+        type: 2}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e5d75deec6a5cb4b94f38e6607ed9e2, type: 2}
