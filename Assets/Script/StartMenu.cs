@@ -18,6 +18,11 @@ public class StartMenu : MonoBehaviour {
 
     void Start()
     {
+        if (!GooglePlayGames.PlayGamesPlatform.Instance.IsAuthenticated())
+        {
+            GooglePlayGames.PlayGamesPlatform.Activate();
+            Social.localUser.Authenticate((bool succes) => { if (succes) Debug.Log("Login"); else Debug.Log("Falsre");});
+        }
         profile = GameObject.Find("Profile").gameObject.GetComponent<Profile>();
         Time.timeScale = 1;
     }
